@@ -10,7 +10,7 @@
                     v-model="propietario.nombre"
                     v-validate="'required'"
                     name="nombre"
-                    placeholder="Ingres su nombre"
+                    placeholder="Ingrese su nombre"
                     :class="{'is-invalid': errors.has('propietario.nombre') && submitted}">
                 <div class="invalid-feedback">
                     Please provide a valid name.
@@ -22,7 +22,7 @@
                 <input
                     type="text"
                     class="form-control"
-                    id="nombre"
+                    id="apellido"
                     v-model="propietario.apellido"
                     v-validate="'required'"
                     name="apellido"
@@ -42,7 +42,7 @@
                     v-model="propietario.edad"
                     v-validate="'required'"
                     name="apellido"
-                    placeholder="Ingrese su edad"
+                    placeholder="Ingrese su cédula"
                     :class="{'is-invalid': errors.has('propietario.edad') && submitted}">
                 <div class="invalid-feedback">
                     Please provide a valid edad.
@@ -70,17 +70,15 @@
 </template>
 
 <script>
-
 import axios from 'axios';
-
 export default {
     data() {
         return {
             propietario: {
                 nombre: '',
                 apellido: '',
-                edad: '',
                 nacionalidad: '',
+                edad: '',
             },
             submitted: false
         }
@@ -92,7 +90,7 @@ export default {
                 if (!result) {
                     return;
                 }
-                console.log(this.nacionalidad)
+                console.log(this.apellido)
                 axios.post('http://127.0.0.1:8000/api/propietario/',
                         this.propietario
                     )

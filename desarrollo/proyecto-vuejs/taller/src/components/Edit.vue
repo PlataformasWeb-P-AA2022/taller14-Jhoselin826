@@ -38,13 +38,14 @@
 </template>
 <script>
 import axios from 'axios';
-
 export default {
     data() {
         return {
             propietario: {
                 nombre: '',
                 apellido: '',
+                edad: '',
+                nacionalidad: '',
                 url: '',
             },
             submitted: false

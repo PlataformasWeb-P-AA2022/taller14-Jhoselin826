@@ -26,7 +26,7 @@
                     v-model="departamento.nroCuartos"
                     v-validate="'required'"
                     name="nroCuartos"
-                    placeholder="Ingrese Numero de cuartos"
+                    placeholder="Ingrese numero de cuartos"
                     :class="{'is-invalid': errors.has('departamento.nroCuartos') && submitted}">
                 <div class="invalid-feedback">
                     Please provide a valid nroCuartos.
@@ -34,18 +34,18 @@
             </div>
 
             <div class="form-group">
-                <label for="numeroBanioos">Numero de baños</label>
+                <label for="nroBanios">Numero de baños</label>
                 <input
                     type="text"
                     class="form-control"
-                    id="numeroBanios"
-                    v-model="departamento.numeroBanios"
+                    id="nroBaños"
+                    v-model="departamento.nroBanios"
                     v-validate="'required'"
-                    name="numeroBanios"
-                    placeholder="Ingrese Numero de baños"
-                    :class="{'is-invalid': errors.has('departamento.numeroBanios') && submitted}">
+                    name="nroBanios"
+                    placeholder="Ingrese numero de baños"
+                    :class="{'is-invalid': errors.has('departamento.nroBanios') && submitted}">
                 <div class="invalid-feedback">
-                    Please provide a valid numeroBanios.
+                    Please provide a valid nroBanios.
                 </div>
             </div>
 
@@ -58,7 +58,7 @@
                     v-model="departamento.valorAlicuota"
                     v-validate="'required'"
                     name="valorAlicuota"
-                    placeholder="Ingrese Valor de alicuota"
+                    placeholder="Ingrese valor de alicuota"
                     :class="{'is-invalid': errors.has('departamento.valorAlicuota') && submitted}">
                 <div class="invalid-feedback">
                     Please provide a valid valorAlicuota.
@@ -79,16 +79,14 @@
 </template>
 
 <script>
-
 import axios from 'axios';
-
 export default {
     data() {
         return {
             departamento: {
                 costo: '',
                 nroCuartos: '',
-                nroBaños: '',
+                nroBanios: '',
                 valorAlicuota: '',
                 propietario: '',
             },
@@ -102,14 +100,13 @@ export default {
     methods: {
       getEstudiantesList() {
             axios
-            .get('http://127.0.0.1:8000/api/propietarios/')
+            .get('http://127.0.0.1:8000/api/propietario/')
             .then(response => {
                 this.propietariosList = response.data
             })
             .catch(error => {
                 console.log(error)
             })
-
         },
         create: function (e) {
             this.$validator.validate().then(result => {
@@ -117,11 +114,11 @@ export default {
                 if (!result) {
                     return;
                 }
-                axios.post('http://127.0.0.1:8000/api/departamentos/',
+                axios.post('http://127.0.0.1:8000/api/departamento/',
                         this.departamento
                     )
                     .then(response => {
-                        this.$router.push('/departamentos');
+                        this.$router.push('/departamento');
                     })
             });
         }

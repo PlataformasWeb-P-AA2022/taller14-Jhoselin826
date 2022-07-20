@@ -2,41 +2,41 @@
     <div class="pt-5">
         <form @submit.prevent="create" method="post">
             <div class="form-group">
-                <label for="telefono">Numero</label>
+                <label for="costo">Costo del departamento</label>
                 <input
                     type="text"
                     class="form-control"
-                    id="telefono"
-                    v-model="telefono.telefono"
+                    id="costo"
+                    v-model="departamento.costo"
                     v-validate="'required'"
-                    name="telefono"
-                    placeholder="Ingres telefono"
-                    :class="{'is-invalid': errors.has('telefono.telefono') && submitted}">
+                    name="costo"
+                    placeholder="Ingrese costo"
+                    :class="{'is-invalid': errors.has('departamento.costo') && submitted}">
                 <div class="invalid-feedback">
                     Please provide a valid name.
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="tipo">Tipo</label>
+                <label for="nroCuartos">Numero de cuartos</label>
                 <input
                     type="text"
                     class="form-control"
-                    id="Tipo"
-                    v-model="telefono.tipo"
+                    id="nroCuartos"
+                    v-model="departamento.nroCuartos"
                     v-validate="'required'"
-                    name="tipo"
-                    placeholder="Ingrese Tipo"
-                    :class="{'is-invalid': errors.has('telefono.tipo') && submitted}">
+                    name="nroCuartos"
+                    placeholder="Ingrese Numero de cuartos"
+                    :class="{'is-invalid': errors.has('departamento.nroCuartos') && submitted}">
                 <div class="invalid-feedback">
-                    Please provide a valid apellido.
+                    Please provide a valid numero de cuartos.
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="estudiante">Estudiante</label>
-                <select v-model="telefono.estudiante">
-                            <option v-for="e in estudiantesList" :key="e.url" :value="e.url">{{ e.nombre }} {{ e.apellido }}</option>
+                <label for="propietario">Propietario</label>
+                <select v-model="departamento.propietario">
+                            <option v-for="e in propietariosList" :key="e.url" :value="e.url">{{ e.nombre }} {{ e.apellido }}</option>
                         </select>
             </div>
 
@@ -46,40 +46,37 @@
 </template>
 
 <script>
-
 import axios from 'axios';
-
 export default {
     data() {
         return {
-            telefono: {
-                telefono: '',
-                tipo: '',
-                estudiante: '',
+            departamento: {
+                costo: '',
+                nroCuartos: '',
+                propietario: '',
             },
-            estudiantesList: [],
+            propietariosList: [],
             submitted: false
         }
     },
     mounted() {
-        this.getEstudiantesList(),
-        axios.get('http://127.0.0.1:8000/api/numerost/' + this.$route.params.id + '/')
+        this.getPropietariosList(),
+        axios.get('http://127.0.0.1:8000/api/departamento/' + this.$route.params.id + '/')
             .then( response => {
                 console.log(response.data)
-                this.telefono = response.data
+                this.departamento = response.data
         });
     },
     methods: {
-      getEstudiantesList() {
+      getPropietariosList() {
             axios
-            .get('http://127.0.0.1:8000/api/estudiantes/')
+            .get('http://127.0.0.1:8000/api/propietario/')
             .then(response => {
-                this.estudiantesList = response.data
+                this.propietariosList = response.data
             })
             .catch(error => {
                 console.log(error)
             })
-
         },
         create: function (e) {
             this.$validator.validate().then(result => {
@@ -87,11 +84,11 @@ export default {
                 if (!result) {
                     return;
                 }
-                axios.put(`http://127.0.0.1:8000/api/numerost/${this.telefono.id}/`,
-                        this.telefono
+                axios.put(`http://127.0.0.1:8000/api/departamento/${this.departamento.id}/`,
+                        this.departamento
                     )
                     .then(response => {
-                        this.$router.push('/telefonos');
+                        this.$router.push('/departamentos');
                     })
             });
         }

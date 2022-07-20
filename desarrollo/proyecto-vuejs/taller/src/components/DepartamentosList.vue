@@ -1,13 +1,13 @@
 <template>
     <div class="pt-5">
-        <div v-if="departamento && departamento.length">
+        <div v-if="departamentos && departamentos.length">
             <div class="card mb-3" v-for="departamento of departamentos" v-bind:key="departamento.id">
                 <div class="row no-gutters">
                     <div class="col-md-4">
                         <div class="card-body">
-                            <span class="card-title"><b>Número:</b> {{ departamento.costoDepartamento }}</span>
+                            <span class="card-title"><b>Costo:</b> {{ departamento.costo }}</span>
                             <br>
-                            <span class="card-text"><b>Tipo:</b> {{ departamento.tipo }}</span>
+                            <span class="card-text"><b>Numero de cuartos:</b> {{ departamento.nroCuartos }}</span>
                             <br>
                             <router-link :to="{name: 'edit_departamento', params: { id: departamento.id }}" class="btn btn-sm btn-primary">Editar</router-link>
                             <button class="btn btn-danger btn-sm ml-1" v-on:click="deleteDepartamento(departamento)">Eliminar</button>
@@ -25,9 +25,7 @@
     </div>
 </template>
 <script>
-
 import axios from 'axios';
-
 export default {
     data() {
         return {
