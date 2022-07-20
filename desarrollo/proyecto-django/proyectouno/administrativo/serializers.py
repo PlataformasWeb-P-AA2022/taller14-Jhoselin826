@@ -24,7 +24,7 @@ class PropietarioSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class DepartamentoSerializer(serializers.HyperlinkedModelSerializer):
-    propietario str = serializers.StringRelatedField(source="propietario", read_only=True)
+    propietario_str = serializers.StringRelatedField(source="propietario", read_only=True)
     id = serializers.IntegerField(read_only=True)
     class Meta:
         model = Departamento

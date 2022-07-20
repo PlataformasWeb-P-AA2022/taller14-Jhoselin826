@@ -30,3 +30,4 @@ class NumeroTelefonicoSerializer(serializers.HyperlinkedModelSerializer):
         model = NumeroTelefonico
         # fields = ['id', 'telefono', 'tipo']
         fields = '__all__'
+ 
